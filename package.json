@@ -8,7 +8,6 @@
     "hello": "echo 'hello from packages.json'",
     "build": "npx @11ty/eleventy",
     "dev": "npx @11ty/eleventy --serve"
-    
 
     },
   "keywords": [],
