@@ -21,7 +21,7 @@
             width:40vmin;
             height: 50vmin;
             object-fit: cover;
-            object-position: center;
+            object-position: 100% 50%;
         }
 
         #image-track {
@@ -36,7 +36,7 @@
 </head>
 <body>
 
-<div id="image-track">
+<div id="image-track" data-mouse-down-at="0">
 
     <img class="image" src="https://images.pexels.com/photos/3972039/pexels-photo-3972039.jpeg" draggable="false">
     <img class="image" src="https://images.pexels.com/photos/13216529/pexels-photo-13216529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" draggable="false">
@@ -49,24 +49,13 @@
 </div>
 
 <script>
-
-    window.onmouseup = () => {
-        track.dataset.mouseDownAt = "0";
-        track.dataset.prevPercentage = track.dataset.percentage;
-    }
-
 window.onmousemove = e => {
-    if(track.dataset.mouseDownAt === "0") return;
+    
+const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX
+    mouseDelta = window.innerWidth / 2;
 
-    const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
-    maxDelta = window.innerWidth / 2;
+const percentage = (mouseDelta / maxDelta) * 100;
 
-    const percentage = (mouseDelta / maxDelta) * -100,
-    nextPercentage = parseFloat(track.dataset.prevPercentage) + percentage;
-
-    track.dataset.percentage = nextPercentage;
-
-    track.style.transform = `translate(${nextPercentage}%, -50)` ;
 }
 
 </script>
