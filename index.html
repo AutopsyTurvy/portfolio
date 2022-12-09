@@ -4,12 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Get a Cat, Arthur!</title>
 
     <style>
 
-        p{
-            color: purple;
+        body {
+
+            height: 100vh;
+            width: 100vw;
+            background-color: black;
+            margin: 0rem;
+            overflow: hidden;
+        }
+
+        #image-track > .image {
+            width:40vmin;
+            height: 50vmin;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        #image-track {
+
+            display: flex;
+            gap: 4vmin;
+            position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
         }
 
 
@@ -17,66 +36,38 @@
 </head>
 <body>
 
+<div id="image-track">
 
+    <img class="image" src="https://images.pexels.com/photos/3972039/pexels-photo-3972039.jpeg" draggable="false">
+    <img class="image" src="https://images.pexels.com/photos/13216529/pexels-photo-13216529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" draggable="false">
+    <img class="image" src="https://images.pexels.com/photos/302280/pexels-photo-302280.jpeg" draggable="false">
+    <img class="image" src="https://images.pexels.com/photos/236587/pexels-photo-236587.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" draggable="false">
+    <img class="image" src="https://images.pexels.com/photos/1645768/pexels-photo-1645768.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" draggable="false">
+    <img class="image" src="https://images.pexels.com/photos/5467914/pexels-photo-5467914.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" draggable="false">
+    <img class="image" src="https://images.pexels.com/photos/10620891/pexels-photo-10620891.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" draggable="false">
 
-<p>Ha HA! I deleted it locally using only the terminal, then cloned the repository in new files I made to contain it-- 
-    This will constitute the changes I will now stage to github!</p>
-
-
-
-<p>Okay-- Did not work! I discovered that you apparently can't make changes to a local repo
-     that you cloned and you need to pull the entire thing. SOoooooooooooo..
-    I deleted the files I had made, then made another to pull the file to. After pulling all of them
-I used the shell command to be able to open VS code from the terminal-- 
-
-Almost accidentally saved all of my computer files because I had not specified the file I was about to push from. ops.
-
-Re-opened it, added this change to take note of this saga-- 
- and will now attempt to save it and push to github again- </p>
-
- <p>Push seemed not to work-- the push went through but for some reason did not show up on github..</p>
-
- <p>Note-- It did in fact work. it was just not there when I reloaded github. 
-    Opened the in browser and have seen that it's up to date. Will check again after this- but IT'S DONE!!
- </p>
-
-
- <p>Today's adventure is an interesting one, and one that I still haven't figured out-- 
-Each time I tried to remove the code files I got the same "Access denied" complaint =
-(override r--r--r-- kitty/staff for projects/.git/objects/). 
-From there the terminal wouldn't let me change directories or make any commands and I would have to restart the terminal
-in order to do anything. I rummaged on the internet to find a solution. I downloaded the files to my computer straight from
-github then tried to change permission to who had access to said files. I tried to override the fact that access was denied,
-I tried to give permission and followed numerous solutions to try to deal with it. 
-In the end I tried to enter the file after some messing about and it said there was no such file path. I assume this means that 
-my deleting the file worked SOMEHOW? I'll look into it more after pulling this and making changes to push again.
-I managed to pull these files to another code file I made :) It'll be interesting to see if I get the same problem with this file
-in the morning! Hope you're having a good weekend!
- 
-</p>
-
-<li>
-    <ul>Cloned</ul>
-    <ul>and changes made!</ul>
-
-    <ul>It is a PAIN today! It does not want me to push the changes-- 
-        I am continually told that there are changes not staged for commit.
-    Trying to work out what's wrong now....</ul>
-    
-    <p>Figured it out-- had to delete some things : ) </p>
-
-    <p>Same issues today as yesterday-- 
-        I had to delete the whole thing to make the smallest push as git commit was having none of it</p>
-
-</li>
-
-
-<ul>Cloned</ul>
-
-
+</div>
 
 <script>
 
+    window.onmouseup = () => {
+        track.dataset.mouseDownAt = "0";
+        track.dataset.prevPercentage = track.dataset.percentage;
+    }
+
+window.onmousemove = e => {
+    if(track.dataset.mouseDownAt === "0") return;
+
+    const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
+    maxDelta = window.innerWidth / 2;
+
+    const percentage = (mouseDelta / maxDelta) * -100,
+    nextPercentage = parseFloat(track.dataset.prevPercentage) + percentage;
+
+    track.dataset.percentage = nextPercentage;
+
+    track.style.transform = `translate(${nextPercentage}%, -50)` ;
+}
 
 </script>
 </body>
