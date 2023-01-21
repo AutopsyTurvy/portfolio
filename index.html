@@ -17,6 +17,13 @@
             overflow: hidden;
         }
 
+        #image-track {
+            
+            display: flex;
+            gap: 4vmin;
+            position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+}
+
         #image-track > .image {
             width:40vmin;
             height: 50vmin;
@@ -24,12 +31,7 @@
             object-position: 100% 50%;
         }
 
-        #image-track {
-
-            display: flex;
-            gap: 4vmin;
-            position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-        }
+   
 
 
     </style>
@@ -50,26 +52,25 @@
 
 <script>
 
-window.onmouseup = () => {
+const track = document.getElementById("image-track");
 
-track.dataset.mouseDownAt = "0";
-track.dataset.prevPercentage = track.dataset.percentage;
-}
+window.onmousedown = e => {
+    track.dataset.mouseDownAt = e.clientX;
+
 
 window.onmousemove = e => {
-    if(track.dataset.mouseDownAt === "0") return;
-
     const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
           maxDelta = window.innerWidth / 2;
-          
-    const percentage = (mouseDelta / maxDelta) * -100,
-          nextPercentage = parseFloat(track.dataset.prevPercentage) + percentage;
+
+    const percentage = (mouseDelta / maxDelta) * 100;
+
+    track.style.transform = `translate(${percentage}%, -50%)`;
 
 
-    track.dataset.percentage = nextPercentage;
-
-    track.style.transform = `translate(${nextPercentage}%, -50%)`;
 }
+
+}
+
 
 
 </script>
